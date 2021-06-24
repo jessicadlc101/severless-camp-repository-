@@ -23,12 +23,12 @@ if (uri[0] != "h") {
 
 try {
     (async () => {
-        const resp = await fetch(uri + "&password=letmein", {
+        const resp = await fetch(uri + "?password=letmein", {
             method: 'GET'
         });
         var correct = await resp.text()
 
-        const response = await fetch(uri + "&password=incorrect", {
+        const response = await fetch(uri + "?password=incorrect", {
             method: 'GET'
         });
         var incorrect = await response.text()
