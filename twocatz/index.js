@@ -18,11 +18,12 @@ module.exports = async function (context, req) {
     
         return base64data
     } 
+    
     let catpic1 = await getCat() 
     let catpic2 = await getCat() 
 
-    async function getNames () {
-        var names =["Shreya", "Emily", "Fifi", "Evelyn", "Julia", "Daniel", "Fardeen"]
+    function getNames () {
+        var names =["Shreya", "Emily", "Beau", "Fifi", "Evelyn", "Julia", "Daniel", "Fardeen"]
         var random_value = Math.floor(names.length * Math.random())
         var resultname = names[random_value] 
             
