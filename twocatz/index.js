@@ -4,14 +4,13 @@ module.exports = async function (context, req) {
     context.log('JavaScript HTTP trigger function processed a request.');
 
     async function getCat() {
-        let resp = await fetch("https://cataas.com/cat/cute/says/Bitcamp", {
+        let resp = await fetch("https://cataas.com/cat/cute/says/Bitcamp",{ 
             method: 'GET'
         });
         
         let data = await resp.arrayBuffer()
         // we need to receive it as a buffer since this is an image we are receiving from the API
         // Buffer?? https://developer.mozilla.org/en-US/docs/Web/API/Blob
-        
         var base64data = Buffer.from(data).toString('base64')
         //put what you want to turn into base64 inside "originaldata"
         //"originaldata" will be encoded in base64.  
@@ -23,7 +22,7 @@ module.exports = async function (context, req) {
     let catpic2 = await getCat() 
 
     function getNames () {
-        var names =["Shreya", "Emily", "Beau", "Fifi", "Evelyn", "Julia", "Daniel", "Fardeen"]
+        var names =["Shreya", "Emily", "Beau", "Evelyn", "Julia", "Daniel", "Fardeen"]
         var random_value = Math.floor(names.length * Math.random())
         var resultname = names[random_value] 
             
@@ -43,7 +42,7 @@ module.exports = async function (context, req) {
             names: [name1, name2] 
         }     
     };
-}  
+ }  
 
 var JSON = { 
         "key" : "value"
