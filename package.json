@@ -21,6 +21,7 @@
   "homepage": "https://github.com/jessicadlc101/severless-camp-repository-#readme",
   "dependencies": {
     "awesome-dev-jokes": "^1.0.3",
+    "morse-code-converter": "^1.0.2",
     "node-fetch": "^2.6.1",
     "pig-latin": "^2.0.2"
   }
