@@ -18,8 +18,8 @@ module.exports = async function (context, req) {
         return base64data
     } 
     
-    let catpic1 = await getCat() 
-    let catpic2 = await getCat() 
+    let cat1 = await getCat() 
+    let cat2 = await getCat() 
 
     function getNames () {
         var names =["Shreya", "Emily", "Beau", "Evelyn", "Julia", "Daniel", "Fardeen"]
@@ -37,8 +37,8 @@ module.exports = async function (context, req) {
     context.res = {
         // status: 200, /* Defaults to 200 */
         body: {
-            catpic1: catpic1,
-            catpic2: catpic2, 
+            cat1: cat1,
+            cat2: cat2, 
             names: [name1, name2] 
         }     
     };
