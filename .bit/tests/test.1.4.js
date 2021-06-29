@@ -26,7 +26,7 @@ for(var i = 0; i < commit_file.length; i++) {
 
 
 test1 = "fifiiscool";
-uri1 = uri + "?password=" + test1;
+uri1 = uri + "&password=" + test1;
 if (uri[0] != "h") {
    throw new Error("You have not added your function url as a secret!");
 }
