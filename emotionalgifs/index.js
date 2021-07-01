@@ -1,4 +1,5 @@
-var multipart = require('parse-multipart');
+var multipart = require('parse-multipart'); 
+var fetch = require('node-fetch');
 
 module.exports = async function (context, req) {
     context.log('JavaScript HTTP trigger function processed a request.');
@@ -9,10 +10,36 @@ module.exports = async function (context, req) {
 
     var parts = multipart.Parse(body, boundary);
 
-    let base64data = Buffer.from(parts[0].data).toString('base64');
-   
+    var result = await analyzeImage(imageData);
     context.res = {
-        // status: 200, /* Defaults to 200 */
-        body: base64data
+	body: {
+		    result
+	  }
+    
     };
+    console.log(result)
+    context.done(); 
+    
+}
+
+async function analyzeImage(img){
+    const subscriptionKey = process.env.SUBSCRIPTIONKEY;
+    const uriBase = process.env.ENDPOINT + '/face/v1.0/detect'; 
+    
+    let params = new URLSearchParams({
+        'returnFaceId': 'true',
+        'returnFaceAttributes': 'emotion'     
+    
+    })
+    let resp = await fetch(uriBase + '?' + params.toString(), {
+        method: 'POST',  
+        body: img,  
+      
+        headers: {
+            'Content-Type': 'application-octet-stream',
+            'Ocp-Apim-Subscription-Key': subscriptionKey
+        }
+    }) 
+let emotionData = await resp.json() 
+return emotionData
 }
