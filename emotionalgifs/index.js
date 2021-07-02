@@ -1,10 +1,14 @@
+
 var multipart = require('parse-multipart'); 
 var fetch = require('node-fetch');
+
+
 
 module.exports = async function (context, req) {
     context.log('JavaScript HTTP trigger function processed a request.');
 
     var boundary = multipart.getBoundary(req.headers['content-type']);
+
     var body = req.body
     var parts = multipart.Parse(body, boundary); 
     var image= parts[0].data
@@ -12,6 +16,7 @@ module.exports = async function (context, req) {
     var result = await analyzeImage(image);
     
     let emotions = result[0].faceAttributes.emotion;
+
 
     let objects = Object.values(emotions);
 
@@ -32,7 +37,8 @@ async function analyzeImage(img){
         'returnFaceAttributes': 'emotion'     
     
     })
-    
+   
+
     let resp = await fetch(uriBase + '?' + params.toString(), {
         method: 'POST',  
         body: img,  
@@ -53,3 +59,4 @@ async function findGifs(emotion) {
     let gifresp = await gifresponse.json() 
     return gifresp.data.url
 }
+
