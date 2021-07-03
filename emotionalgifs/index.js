@@ -1,10 +1,17 @@
-var multipart = require('parse-multipart'); 
-var fetch = require('node-fetch');
+
+
+
+var multipart = require('parse-multipart');
+var fetch = require('node-fetch')
+
 
 module.exports = async function (context, req) {
     context.log('JavaScript HTTP trigger function processed a request.');
 
-    var boundary = multipart.getBoundary(req.headers['content-type']);
+    var boundary = multipart.getBoundary(req.headers['content-type'])
+
+  
+
     var body = req.body
     var parts = multipart.Parse(body, boundary); 
     var image= parts[0].data
@@ -12,7 +19,7 @@ module.exports = async function (context, req) {
     var result = await analyzeImage(image);
     
     let emotions = result[0].faceAttributes.emotion;
-
+  
     let objects = Object.values(emotions);
 
     const main_emotion = Object.keys(emotions).find(key => emotions[key] === Math.max(...objects));
@@ -33,11 +40,41 @@ async function analyzeImage(img){
     
     })
     
+
+    var parts = multipart.Parse(body, boundary); 
+
+    var imageData = parts[0].data 
+
+    var result = await analyzeImage(imageData);
+    context.res = {
+	    body: {
+		    result
+	    }
+    };
+    console.log(result)
+    context.done(); 
+    
+    context.res = {
+        // status: 200, /* Defaults to 200 */
+        body: base64data
+    };
+} 
+
+async function analyzeImage(img){
+    const subscriptionKey = process.env.SUBSCRIPTIONKEY;
+    const uriBase = process.env.ENDPOINT + '/face/v1.0/detect';
+    let params = new URLSearchParams({
+        'returnFaceId': 'true',
+        'returnFaceAttributes': '<emotion'     
+    }) 
+   
+
     let resp = await fetch(uriBase + '?' + params.toString(), {
         method: 'POST',  
         body: img,  
       
         headers: {
+
             'Content-Type': 'application/octet-stream',
             'Ocp-Apim-Subscription-Key': subscriptionKey
         }
@@ -53,3 +90,14 @@ async function findGifs(emotion) {
     let gifresp = await gifresponse.json() 
     return gifresp.data.url
 }
+
+            'Content-Type': 'application/octet-stream', 
+            'Ocp-Apim-Subscription-Key': SUBSCRIPTIONKEY
+        } 
+    }) 
+
+    let emotionData = await resp.json() 
+    return emotionData 
+
+}
+

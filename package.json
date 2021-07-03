@@ -20,6 +20,8 @@
   },
   "homepage": "https://github.com/jessicadlc101/severless-camp-repository-#readme",
   "dependencies": {
+    "fetch": "^1.1.0",
+    "node-fetch": "^2.6.1",
     "parse-multipart": "^1.0.4"
   }
 }
