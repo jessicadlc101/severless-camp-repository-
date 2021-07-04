@@ -28,13 +28,13 @@ module.exports = async function (context, req) {
 
 function determine_generation(age) {
     let generation;
-    if(age > 5 || age < 25) { 
+    if(age > 5 && age < 25) { 
         generation = "GenZ"; 
-    } else if(age > 24 || age < 41) { 
+    } else if(age > 24 && age < 41) { 
         generation = "GenY"; 
-    } else if(age > 40 || age < 57) { 
+    } else if(age > 40 && age < 57) { 
         generation = "GenX";  
-    } else if(age > 56 || age < 76) { 
+    } else if(age > 56 && age < 76) { 
         generation = "BabyBoomers";  
     } else { 
         generation = "Unknown"; 
