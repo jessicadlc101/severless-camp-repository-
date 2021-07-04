@@ -8,15 +8,12 @@ module.exports = async function (context, req) {
     const url = queryObject.MediaUrl0;
 
     let resp = await fetch(url, {
-        method: 'GET'
-        }
-    ) 
+        method: 'GET',
+    }) 
     
     let data = await resp.arrayBuffer()  
-
     let age_data = await analyzeImage(data) 
-
-    let age = result[0].faceAttributes.age
+    let age = age_data[0].faceAttributes.age
     
     let generation = determine_generation(age)
     
