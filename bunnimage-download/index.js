@@ -1,4 +1,3 @@
-const multipart = require('parse-multipart');
 const fetch = require('node-fetch');
 
 module.exports = async function (context, req) {
@@ -46,6 +45,5 @@ module.exports = async function (context, req) {
      };
      
      context.log(download);
-     context.done();
-  
+     context.done(); 
 }
