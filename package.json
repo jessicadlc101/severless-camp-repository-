@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/jessicadlc101/severless-camp-repository-#readme",
   "dependencies": {
-    "@azure/storage-blob": "^12.6.0",
+    "@azure/storage-blob": "^12.2.1",
     "node-fetch": "^2.6.1",
     "parse-multipart": "^1.0.4"
   }
