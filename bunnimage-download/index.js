@@ -3,7 +3,7 @@ const fetch = require('node-fetch');
 module.exports = async function (context, req) {
     context.log('JavaScript HTTP trigger function processed a request.');
     
-    let blogname = "serverlessdos"
+    let blogname = "photo-1507003211169-0a1dd7228f2d (1).jfif"
     
     var username = req.headers['username'];
     
