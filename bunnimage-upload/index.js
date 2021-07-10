@@ -1,4 +1,4 @@
-var multipart = require("parse-multipart");
+const multipart = require("parse-multipart");
 const fetch = require('node-fetch');
 
 const connectionString = process.env.AZURE_STORAGE_CONNECTION_STRING;
