@@ -20,7 +20,9 @@ module.exports = async function (context, req) {
         } else if (filetype == "image/jpeg") {
              ext = "jpeg";
         } else if (filetype == "image/jpg") {
-             ext = "jpg"
+             ext = "jpg" 
+        } else if (filetype == "image/jpeg") {
+                ext = "jpeg"
         } else {
         username = "invalidimage"
              ext = ""; 
