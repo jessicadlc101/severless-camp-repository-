@@ -17,12 +17,8 @@ module.exports = async function (context, req) {
         var filetype = parsedBody[0].type;
         if (filetype == "image/png") {
              ext = "png";
-        } else if (filetype == "image/jpeg") {
-             ext = "jpeg";
         } else if (filetype == "image/jpg") {
-             ext = "jpg" 
-        } else if (filetype == "image/jpeg") {
-                ext = "jpeg"
+             ext = "jpg"   
         } else {
         username = "invalidimage"
              ext = ""; 
