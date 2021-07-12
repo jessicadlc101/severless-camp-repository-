@@ -18,13 +18,14 @@ module.exports = async function (context, req) {
         if (filetype == "image/png") {
              ext = "png";
         } else if (filetype == "image/jpg") {
-             ext = "jpg"   
+             ext = "jpg"    
         } else {
         username = "invalidimage"
              ext = ""; 
         }
-        responseMessage = await uploadFile(parsedBody, ext, password); 
-} catch(err) {
+        responseMessage = await uploadFile(parsedBody, ext); 
+
+    } catch(err) {
     context.log("Undefined body image");
     responseMessage = "Sorry! No image attached."
 }
@@ -40,7 +41,7 @@ async function uploadFile(parsedBody, ext, password) {
     const containerName = "images";
     const containerClient = blobServiceClient.getContainerClient(containerName);  
     
-    const blobName = password + "." + ext;    // Create the container
+    const blobName = password + "te." + ext;    // Create the container
     const blockBlobClient = containerClient.getBlockBlobClient(blobName); // Get a block blob client
 
     const uploadBlobResponse = await blockBlobClient.upload(parsedBody[0].data, parsedBody[0].data.length);
