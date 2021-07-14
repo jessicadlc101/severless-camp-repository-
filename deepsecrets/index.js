@@ -58,7 +58,7 @@ const config = {
 
     let items = await createDocument(document)
     
-    const responseMessage = `Thanks 😊! Stored your secret "${queryObject.Body}". 😯 Someone confessed that: ${JSON.stringify(items[0].message)}`
+    const responseMessage = `Thanks 😊! Stored your secret "${message}". 😯 Someone confessed that: ${JSON.stringify(items[0].message)}`
 
     context.res = {
         // status: 200, /* Defaults to 200 */
