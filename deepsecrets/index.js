@@ -2,8 +2,8 @@ const querystring = require('querystring');
 const CosmosClient = require("@azure/cosmos").CosmosClient;
 
 const config = {
-    endpoint: process.env.COSMOS_ENDPOINT,
-    key: process.env.COSMOS_KEY,
+    endpoint: process.env.ENDPOINT,
+    key: process.env.KEY,
     databaseId: "SecretStorer",
     containerId: "secrets",
     partitionKey: {kind: "Hash", paths: ["/secrets"]}
@@ -51,13 +51,14 @@ const config = {
   }
   module.exports = async function (context, req) {
     context.log('JavaScript HTTP trigger function processed a request.');
-
+   
     const queryObject = querystring.parse(req.body);
-    
-    let newMessage = { 
-        "message" : queryObject.Body 
-    }
-    let items = await createDocument(newMessage); 
+
+    let message = queryObject.Body;
+
+    let document = {"message" : message}
+
+    let items = await createDocument(document)
     
     const responseMessage = `Thanks 😊! Stored your secret "${queryObject.Body}". 😯 Someone confessed that: ${JSON.stringify(items[0].message)}`
 
