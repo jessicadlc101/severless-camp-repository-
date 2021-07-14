@@ -8,9 +8,20 @@ const config = {
     containerId: "secrets",
     partitionKey: {kind: "Hash", paths: ["/secrets"]}
   };
-  const config = require("../config");
-  const CosmosClient = require("@azure/cosmos").CosmosClient;
   
+  module.exports = async function (context, req) {
+    context.log('JavaScript HTTP trigger function processed a request.');
+   
+    const queryObject = querystring.parse(req.body);
+
+    let message = queryObject.Body;
+
+    let document = {"message" : message}
+
+    let items = await createDocument(document)
+    
+    const responseMessage = `Thanks 😊! Stored your secret "${message}". 😯 Someone confessed that: ${JSON.stringify(items[0].message)}`
+
   async function create(client, databaseId, containerId) {
     const partitionKey = config.partitionKey;
   
@@ -44,22 +55,11 @@ const config = {
        }; 
 
     const { resources: items } = await container.items.query(querySpec).fetchAll(); 
-
-        return items
+    const {resource: createdItem} = await container.items.create(newItem);
+      
+    return items
   }
-  module.exports = async function (context, req) {
-    context.log('JavaScript HTTP trigger function processed a request.');
-   
-    const queryObject = querystring.parse(req.body);
-
-    let message = queryObject.Body;
-
-    let document = {"message" : message}
-
-    let items = await createDocument(document)
-    
-    const responseMessage = `Thanks 😊! Stored your secret "${message}". 😯 Someone confessed that: ${JSON.stringify(items[0].message)}`
-
+  
     context.res = {
         // status: 200, /* Defaults to 200 */
         body: responseMessage
