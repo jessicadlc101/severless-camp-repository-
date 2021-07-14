@@ -15,8 +15,9 @@ const config = {
     const partitionKey = config.partitionKey;
   
     const { database } = await client.databases.createIfNotExists({
-      id: databaseId
+      id: config.databaseId
     });
+    
     console.log(`Created database:\n${database.id}\n`);
   
     const { container } = await client
@@ -37,15 +38,12 @@ const config = {
     const container = database.container(containerId);
     
     await create(client, databaseId, containerId); 
+    
     const querySpec = { 
         query: "SELECT top 1 * FROM c order by c._ts desc"
        }; 
 
-       const { resources: items } = await container.items
-            .query(querySpec)
-            .fetchAll(); 
-
-        const { resources: createdItem } = await container.items.query(querySpec).fetchAll();
+    const { resources: items } = await container.items.query(querySpec).fetchAll(); 
 
         return items
   }
