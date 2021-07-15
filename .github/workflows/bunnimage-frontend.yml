@@ -47,7 +47,7 @@ jobs:
         if: ${{steps.vars.outputs.count == 41 && github.event.head_commit.message != 'Update progress'}}
         with:
           spec: cypress/integration/4.4.spec.js
-
+ 
       - name: Check for branch
         if: ${{steps.vars.outputs.count > 41 && github.event.head_commit.message != 'Update progress'}}
         run: |
