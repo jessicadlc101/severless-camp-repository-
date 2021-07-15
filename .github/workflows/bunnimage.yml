@@ -1,8 +1,8 @@
-name: Bunnimage
+name: Bunnimage Frontend
 on:
   push:
     branches:
-      - bunnimage
+      - bunnimage-frontend
 
 jobs:
   build:
@@ -20,47 +20,35 @@ jobs:
       - name: Get Count
         id: vars
         run: echo ::set-output name=count::$(cat ./.bit/.progress)
-
+      
+      - name: Install Cypress
+        run: npm install cypress
+        
       - name: Step 1
-        if: ${{steps.vars.outputs.count == 26 && github.event.head_commit.message != 'Update progress'}}
-        env:
-          storage_account_connection_string: ${{ secrets.storage_account_connection_string }}
-          container_name: ${{ secrets.container_name }}
-        run: |
-          npm install @azure/storage-blob
-          node .bit/tests/test.3.1.js
+        uses: cypress-io/github-action@v2
+        if: ${{steps.vars.outputs.count == 38 && github.event.head_commit.message != 'Update progress'}}
+        with:
+          spec: cypress/integration/4.1.spec.js
+
       - name: Step 2
-        if: ${{steps.vars.outputs.count == 27 && github.event.head_commit.message != 'Update progress'}}
-        env:
-          BUNNIMAGE_ENDPOINT: ${{ secrets.BUNNIMAGE_ENDPOINT }}
-          container_name: ${{ secrets.container_name }}
-          blob_url: ${{ secrets.blob_url }}
-        run: |
-          npm install node-fetch
-          npm install form-data
-          node .bit/tests/test.3.2.js
+        uses: cypress-io/github-action@v2
+        if: ${{steps.vars.outputs.count == 39 && github.event.head_commit.message != 'Update progress'}}
+        with:
+          spec: cypress/integration/4.2.spec.js
+
       - name: Step 3
-        if: ${{steps.vars.outputs.count == 28 && github.event.head_commit.message != 'Update progress'}}
-        env:
-          BUNNIMAGE_ENDPOINT: ${{ secrets.BUNNIMAGE_ENDPOINT }}
-          container_name: ${{ secrets.container_name }}
-          blob_url: ${{ secrets.blob_url }}
-        run: |
-          npm install node-fetch
-          npm install form-data
-          node .bit/tests/test.3.3.js
-      - name: Step 5
-        if: ${{steps.vars.outputs.count == 30 && github.event.head_commit.message != 'Update progress'}}
-        env:
-          BUNNIMAGE_ENDPOINT: ${{ secrets.BUNNIMAGE_ENDPOINT }}
-          BUNNIMAGE_ENDPOINT2: ${{ secrets.BUNNIMAGE_ENDPOINT2 }}
-          container_name: ${{ secrets.container_name }}
-          blob_url: ${{ secrets.blob_url }}
-        run: |
-          npm install node-fetch
-          npm install form-data
-          node .bit/tests/test.3.5.js
+        uses: cypress-io/github-action@v2
+        if: ${{steps.vars.outputs.count == 40 && github.event.head_commit.message != 'Update progress'}}
+        with:
+          spec: cypress/integration/4.3.spec.js
+
+      - name: Step 4
+        uses: cypress-io/github-action@v2
+        if: ${{steps.vars.outputs.count == 41 && github.event.head_commit.message != 'Update progress'}}
+        with:
+          spec: cypress/integration/4.4.spec.js
+
       - name: Check for branch
-        if: ${{steps.vars.outputs.count > 30 && github.event.head_commit.message != 'Update progress'}}
+        if: ${{steps.vars.outputs.count > 41 && github.event.head_commit.message != 'Update progress'}}
         run: |
           node .bit/tests/wrongbranch.js
