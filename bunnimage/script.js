@@ -3,6 +3,6 @@ function getImage(event) {
     if (document.getElementById('name').value != '') {
         $('#output').text("Thanks!")
     }else { 
-        alert("No Name error.")
+        alert("No name error.")
     }
 }
