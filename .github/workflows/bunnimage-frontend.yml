@@ -52,4 +52,3 @@ jobs:
         if: ${{steps.vars.outputs.count > 41 && github.event.head_commit.message != 'Update progress'}}
         run: |
           node .bit/tests/wrongbranch.js
-{"mode":"full","isActive":false}
