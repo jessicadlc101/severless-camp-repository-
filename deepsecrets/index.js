@@ -48,7 +48,7 @@ async function createDocument(newItem) {
     await create(client, databaseId, containerId);
 
     const querySpec = {
-    query: "SELECT * from c"
+        query: "SELECT * from c"
 };
 
 
