@@ -31,7 +31,7 @@ async function create(client) {
 });
 
     const { container } = await client
-        database(config.databaseId)
+        .database(config.databaseId)
         .containers.createIfNotExists(
             { id: config.containerId, key: config.partitionKey },
             { offerThroughput: 400 }    
