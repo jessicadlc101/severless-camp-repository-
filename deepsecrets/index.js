@@ -17,25 +17,26 @@ module.exports = async function (context, req) {
     let message = queryObject.Body;
     let document = {"message" : message}
     let items = await createDocument(document)
-} 
+    
     const responseMessage = `Thanks 😊! Stored your secret "${message}". 😯 Someone confessed that: ${JSON.stringify(items[0].message)}`;
    
     context.res = {
                 body: responseMessage
     }; 
+}
 
 async function create(client) {
     const { database } = await client.databases.createIfNotExists({
         id: config.databaseId
 });
 
-const { container } = await client
-    .database(config.databaseId)
-    .containers.createIfNotExists(
-        { id: config.containerId, key: config.partitionKey },
-        { offerThroughput: 400 }
-); 
-}
+    const { container } = await client
+        database(config.databaseId)
+        .containers.createIfNotExists(
+            { id: config.containerId, key: config.partitionKey },
+            { offerThroughput: 400 }    
+    ); 
+    }   
 
 async function createDocument(newItem) {
     var { endpoint, key, databaseId, containerId } = config;
@@ -44,13 +45,15 @@ async function createDocument(newItem) {
     const container = database.container(containerId);
     await create(client, databaseId, containerId);
 
-const querySpec = {
+    const querySpec = {
     query: "SELECT top 1 * FROM c order by c._ts desc"
 };
 
-const { resources: items } = await container.items.query(querySpec).fetchAll();
+    const { resources: items } = await container.items
+        .query(querySpec)
+        .fetchAll();
 
-const {resource: createdItem} = await container.items.create(newItem); 
+    const {resource: createdItem} = await container.items.create(newItem); 
 
 
 return items;
