@@ -1,16 +1,16 @@
 function getImage(event) { 
     event.preventDefault()
     var myform = document.getElementById("myform")
-    let nameInput = document.getElementById("username"); 
+    let nameInput = document.getElementById("name");
     let fileInput = document.getElementById("image");
     let file = fileInput.files[0]; 
     
     var payload = new FormData(myform);
     console.log(payload)
-    payload.append("file", file); 
+    payload.append("file", file);
     $('#output').text("Thanks!")
     
-    if (document.getElementById('username').value != '') {
+    if (document.getElementById('name').value != '') {
         
         try { 
             let url = "https://morse1.azurewebsites.net/api/bunnimage-upload?"
