@@ -25,23 +25,3 @@ function y1k3s() {
         document.getElementById("image4").src = base64Prefix + endpoint4; 
     }
 } 
-
-async function getCatPhoto(name) {
-    try{
-        let url = "https://morse1.azurewebsites.net/api/twocatz?";
-    fetch(url, {
-    headers: {
-    "name": name
-    }
- })
-    .then(response => {
-      return response.json()
-    })
-    .then(data => {
-      console.log(data);
-    });
-}
-     catch(err){
-      alert(err);
-     }
- } 
